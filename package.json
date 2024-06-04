@@ -5,13 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev":"nodemon api/index.js",
+    "dev": "nodemon api/index.js",
     "start": "node api/index.js"
   },
   "author": "Lumin De Silva",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "mongoose": "^8.4.1",
     "nodemon": "^3.1.3"
   }
 }
