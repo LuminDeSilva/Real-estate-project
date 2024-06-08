@@ -1,8 +1,11 @@
 import {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function signOut() {
   const {formDate, setFormData} = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setloading] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -13,14 +16,15 @@ export default function signOut() {
     e.preventDefault();
     try {
       setloading(true);
-      const response = await fetch('/auth/signUp', {
+      const response = await fetch('api/auth/signUp', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData)
       });
       const data = await response.json();
+      console.log(data);
       if(data.success===false) {
         setloading(false);
         setError(data.message);
@@ -28,9 +32,10 @@ export default function signOut() {
       }
       setloading(false);
       setError(null);
+      Navigate('/signIn');
     } catch (error) {
-      console.log(error);
       setloading(false);
+      setError(error.message);
     }
     
   };
@@ -43,9 +48,9 @@ export default function signOut() {
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input type='text' placeholder='username' className='border p-3 rounded-lg' id='username' onChange={handleChange}></input>
         <input type='text' placeholder='email' className='border p-3 rounded-lg' id='email' onChange={handleChange}></input>
-        <input type='text' placeholder='password' className='border p-3 rounded-lg' id='password' onChange={handleChange}></input>
-        <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
-          Sign up
+        <input type='password' placeholder='password' className='border p-3 rounded-lg' id='password' onChange={handleChange}></input>
+        <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
+          {loading ? 'Loading...' : 'Sign Up'}
         </button>
       </form>
       <div className='flex gap-2 mt-5'>
@@ -54,6 +59,7 @@ export default function signOut() {
           <span className='text-blue-700'>Sign in</span>
         </Link>
       </div>
+    {error && <p className='text-red-500 text-center'>{error}</p>}
    </div>
   )
 }
