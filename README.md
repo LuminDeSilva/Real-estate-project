@@ -1,6 +1,6 @@
 # Real Estate Platform
 
-Welcome to our Real Estate Platform! This project is an innovative real estate platform aimed at revolutionizing the property search experience. Built with a sophisticated technology stack and advanced features, our platform offers users a seamless and intuitive way to discover properties that meet their criteria.
+Welcome to the Real Estate Platform! This project is an innovative real estate platform aimed at revolutionizing the property search experience. Built with a sophisticated technology stack and advanced features, the platform offers users a seamless and intuitive way to discover properties that meet their criteria.
 
 ### Technology Stack
 - **Frontend**: ReactJS, Vite
